@@ -9,7 +9,7 @@ const particlesOptions = {
       },
       "move": {
         "enable": true,
-        "speed": 1,
+        "speed": 0.3,
         "random": true,
         "direction": "none",
         "bounce": true,
