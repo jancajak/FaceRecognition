@@ -18,7 +18,7 @@ class Signin extends React.Component {
   }
 
   onSubmitSignIn = () => {
-    fetch('https://shrieking-goosebumps-86761.herokuapp.com/', {
+    fetch('https://shrieking-goosebumps-86761.herokuapp.com/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -28,11 +28,13 @@ class Signin extends React.Component {
     })
       .then(response => response.json())
       .then(user => {
+        console.log(user);
         if (user.id) {
           this.props.loadUser(user);
           this.props.onRouteChange('home');
         }
       })
+      .catch(err => console.log('Error on signin'))
 
   }
 
