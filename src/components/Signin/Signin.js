@@ -17,6 +17,12 @@ class Signin extends React.Component {
     this.setState({ signInPassword: event.target.value })
   }
 
+  handleKeyPress = (e) => {
+    if(e.key === 'Enter') {
+      this.onSubmitSignIn();
+    }
+  }
+
   onSubmitSignIn = () => {
     fetch('http://localhost:3000/signin', {
       method: 'post',
@@ -27,9 +33,9 @@ class Signin extends React.Component {
       })
     })
       .then(response => response.json())
-      .then(user => {
-        if (user.id) {
-          this.props.loadUser(user);
+      .then(data => {
+        if (data.userId) {
+          this.props.loadUser(data);
           this.props.onRouteChange('home');
         }
       })
@@ -48,6 +54,7 @@ class Signin extends React.Component {
                   <div className="mt3">
                     <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                     <input
+                      onKeyPress={this.handleKeyPress}
                       onChange={this.onEmailChange}
                       className="pa2 input-reset ba bg-transparent hover-bg-light-purple hover-dark-silver w-100"
                       type="email"
@@ -58,6 +65,7 @@ class Signin extends React.Component {
                   <div className="mv3">
                     <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                     <input
+                      onKeyPress={this.handleKeyPress}
                       onChange={this.onPasswordChange}
                       className="b pa2 input-reset ba bg-transparent hover-bg-light-purple hover-dark-silver w-100"
                       type="password"
